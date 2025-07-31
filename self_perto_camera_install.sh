@@ -53,6 +53,7 @@ if [ ${#NAO_INSTALADOS[@]} -gt 0 ]; then
   for pacote in "${NAO_INSTALADOS[@]}"; do
     echo "  - $pacote"
   done
+  echo "Execute o Script \"pythonCam_dep-u2204-9.sh\" para instalar as dependências!"
   exit 1
 else
   echo "Todos os pacotes estão instalados!"
