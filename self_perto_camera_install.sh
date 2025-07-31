@@ -1,0 +1,58 @@
+# Download files
+echo "=================================================================="
+echo "Configurador do Self Checkout - PERTO CKT-0250 - By Lopes Dev Team"
+echo "=================================================================="
+
+cd /root
+
+#echo "[1] - Baixando arquivos:"
+#wget http://10.1.7.218/selfcheckout/selfcheckout_files.zip
+
+echo "[2] - Instalando pacotes necessarios:"
+sudo apt update
+sudo apt install -y python3 python3-pip python3-opencv libopencv-dev python3-dev
+pip3 install opencv-python screeninfo
+pip3 install opencv-python-headless
+sudo apt update
+sudo apt install -y build-essential cmake git libgtk2.0-dev pkg-config \
+                 libavcodec-dev libavformat-dev libswscale-dev \
+                 libjpeg-dev libpng-dev libtiff-dev \
+                 libatlas-base-dev gfortran \
+                 libopencv-dev python3-opencv python3-numpy
+pip3 uninstall -y opencv-python
+pip3 install opencv-python
+
+echo "[3] - Extraindo arquivos:"
+cd /root
+unzip selfcheckout_files.zip
+mv selfcheckout_files/* /root
+mv /root/main.py /root/pythonCamIP/main.py
+
+echo "[4] - Movendo PDVTouch.sh:"
+cp /Zanthus/Zeus/pdvJava/PDVTouch.sh /Zanthus/Zeus/pdvJava/PDVTouch.sh_old
+rm -rf /Zanthus/Zeus/pdvJava/PDVTouch.sh 
+cp /root/PDVTouch.sh /Zanthus/Zeus/pdvJava/PDVTouch.sh
+rm /root/PDVTouch.sh
+
+echo "[5] - Concedendo permissoes:"
+chmod +x /Zanthus/Zeus/pdvJava/PDVTouch.sh
+chmod +x /root/self_perto_config.sh
+
+echo "[6] - Limpando arquivos:"
+rm -rf /root/selfcheckout_files.zip
+
+echo "[7] - Config da camera:"
+echo "Informe o usuario: "
+read camera_username
+echo "Informe a senha: "
+read camera_password
+echo "Informe o IP: "
+read camera_ip
+
+echo "[8] - Gerando arquivo de configuracao":
+printf "user=$camera_username\npassword=$camera_password\nipCam=$camera_ip\nport=554\nmonitor_idx=1" > /root/pythonCamIP/config.txt
+
+
+echo "[9] - Finalizado! reiniciando..."
+sleep 5
+reboot
