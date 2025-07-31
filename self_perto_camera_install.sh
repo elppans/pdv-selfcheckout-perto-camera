@@ -1,7 +1,10 @@
 #!/bin/bash
 
 local="$(pwd)"
+PIP_ROOT_USER_ACTION=ignore
+
 export local
+export PIP_ROOT_USER_ACTION
 
 # Download files
 echo "=================================================================="
