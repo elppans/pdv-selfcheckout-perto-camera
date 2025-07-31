@@ -2,6 +2,7 @@
 
 local="$(pwd)"
 export local
+
 # Download files
 echo "=================================================================="
 echo "Configurador do Self Checkout - PERTO CKT-0250 - By Lopes Dev Team"
@@ -24,8 +25,44 @@ echo "=================================================================="
 #                  libatlas-base-dev gfortran \
 #                  libopencv-dev python3-opencv python3-numpy
 
+# Lista de pacotes a serem verificados
+PACOTES=(
+  python3 python3-pip python3-opencv libopencv-dev python3-dev
+  build-essential cmake git libgtk2.0-dev pkg-config
+  libavcodec-dev libavformat-dev libswscale-dev
+  libjpeg-dev libpng-dev libtiff-dev
+  libatlas-base-dev gfortran
+  python3-numpy
+)
+
+# Inicializa a lista de pacotes ausentes
+NAO_INSTALADOS=()
+
+echo "Verificando pacotes no sistema..."
+
+for pacote in "${PACOTES[@]}"; do
+  dpkg -s "$pacote" &> /dev/null
+  if [ $? -ne 0 ]; then
+    NAO_INSTALADOS+=("$pacote")
+  fi
+done
+
+# Se houver pacotes ausentes, exibe e encerra
+if [ ${#NAO_INSTALADOS[@]} -gt 0 ]; then
+  echo "Os seguintes pacotes NÃO estão instalados:"
+  for pacote in "${NAO_INSTALADOS[@]}"; do
+    echo "  - $pacote"
+  done
+  exit 1
+else
+  echo "Todos os pacotes estão instalados!"
+fi
+
+
 cd /root
 pip3 uninstall -y opencv-python
+pip3 install opencv-python screeninfo
+pip3 install opencv-python-headless
 pip3 install opencv-python
 
 echo "[3] - Extraindo arquivos:"
