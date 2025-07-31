@@ -1,31 +1,37 @@
+#!/bin/bash
+
+local="$(pwd)"
+export local
 # Download files
 echo "=================================================================="
 echo "Configurador do Self Checkout - PERTO CKT-0250 - By Lopes Dev Team"
 echo "=================================================================="
 
-cd /root
+# cd /root
 
 #echo "[1] - Baixando arquivos:"
 #wget http://10.1.7.218/selfcheckout/selfcheckout_files.zip
 
-echo "[2] - Instalando pacotes necessarios:"
-sudo apt update
-sudo apt install -y python3 python3-pip python3-opencv libopencv-dev python3-dev
-pip3 install opencv-python screeninfo
-pip3 install opencv-python-headless
-sudo apt update
-sudo apt install -y build-essential cmake git libgtk2.0-dev pkg-config \
-                 libavcodec-dev libavformat-dev libswscale-dev \
-                 libjpeg-dev libpng-dev libtiff-dev \
-                 libatlas-base-dev gfortran \
-                 libopencv-dev python3-opencv python3-numpy
+# echo "[2] - Instalando pacotes necessarios:"
+# sudo apt update
+# sudo apt install -y python3 python3-pip python3-opencv libopencv-dev python3-dev
+# pip3 install opencv-python screeninfo
+# pip3 install opencv-python-headless
+# sudo apt update
+# sudo apt install -y build-essential cmake git libgtk2.0-dev pkg-config \
+#                  libavcodec-dev libavformat-dev libswscale-dev \
+#                  libjpeg-dev libpng-dev libtiff-dev \
+#                  libatlas-base-dev gfortran \
+#                  libopencv-dev python3-opencv python3-numpy
+
+cd /root
 pip3 uninstall -y opencv-python
 pip3 install opencv-python
 
 echo "[3] - Extraindo arquivos:"
-cd /root
-unzip selfcheckout_files.zip
-mv selfcheckout_files/* /root
+# cd /root
+unzip -o "$local"/selfcheckout_files.zip -d /root
+mv /root/selfcheckout_files/* /root
 mv /root/main.py /root/pythonCamIP/main.py
 
 echo "[4] - Movendo PDVTouch.sh:"
