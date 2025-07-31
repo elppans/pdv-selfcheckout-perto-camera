@@ -81,6 +81,9 @@ rm -rf /Zanthus/Zeus/pdvJava/PDVTouch.sh
 cp /root/PDVTouch.sh /Zanthus/Zeus/pdvJava/PDVTouch.sh
 rm /root/PDVTouch.sh
 
+# https://raw.githubusercontent.com/elppans/pdv-touch/refs/heads/main/PDVTouch_Simples_Perto.sh
+# https://raw.githubusercontent.com/elppans/pdv-touch/refs/heads/main/x11vnc.sh
+
 echo "[5] - Concedendo permissoes:"
 chmod +x /Zanthus/Zeus/pdvJava/PDVTouch.sh
 chmod +x /root/self_perto_config.sh
