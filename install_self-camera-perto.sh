@@ -62,12 +62,14 @@ else
   echo "Todos os pacotes estão instalados!"
 fi
 
-
+# OpenCV com suporte à GUI
 cd /root
 pip3 uninstall -y opencv-python
-pip3 install opencv-python screeninfo
-pip3 install opencv-python-headless
-pip3 install opencv-python
+pip3 uninstall -y opencv-python-headless
+# pip3 install opencv-python screeninfo
+# pip3 install opencv-python-headless # opcional, se não quiser GUI
+pip3 install opencv-python # versão com GUI (se compilada corretamente)
+pip3 install screeninfo # obter informações sobre os monitores físicos conectados ao sistema
 
 echo "[3] - Extraindo arquivos:"
 # cd /root
