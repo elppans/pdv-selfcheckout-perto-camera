@@ -1,0 +1,18 @@
+# Comando pra saber qual monitor tá com a configturação "monitor_idx=1"
+
+- Ver monitores conectados com `xrandr`
+
+xrandr --listmonitors
+
+Isso vai mostrar uma lista como:
+
+Monitors: 2
+ 0: +*HDMI-1 1920/520x1080/290+0+0  HDMI-1
+ 1: +DP-1 1280/340x1024/270+1920+0  DP-1
+
+Nesse exemplo:
+
+monitor_idx=0 corresponde ao HDMI-1
+monitor_idx=1 corresponde ao DP-1
+
+
