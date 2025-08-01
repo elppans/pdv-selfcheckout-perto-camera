@@ -83,13 +83,16 @@ rm -rf /Zanthus/Zeus/pdvJava/PDVTouch.sh
 # cp /root/PDVTouch.sh /Zanthus/Zeus/pdvJava/PDVTouch.sh
 rm /root/PDVTouch.sh
 
-curl -JOLk  /Zanthus/Zeus/pdvJava/PDVTouch.sh "https://raw.githubusercontent.com/elppans/pdv-touch/refs/heads/main/PDVTouch_Simples_Perto.sh"
-curl -JOLk  /Zanthus/Zeus/pdvJava/x11vnc.sh "https://raw.githubusercontent.com/elppans/pdv-touch/refs/heads/main/x11vnc.sh"
+curl -JLk -o /Zanthus/Zeus/pdvJava/PDVTouch.sh "https://raw.githubusercontent.com/elppans/pdv-touch/refs/heads/main/PDVTouch_Simples_Perto.sh"
+curl -JLk -o /Zanthus/Zeus/pdvJava/x11vnc.sh "https://raw.githubusercontent.com/elppans/pdv-touch/refs/heads/main/x11vnc.sh"
+curl -JLk -o /Zanthus/Zeus/pdvJava/monitor-pos-set-perto.sh "https://raw.githubusercontent.com/elppans/pdv-touch/refs/heads/main/monitor-pos-set-perto.sh
 
 echo "[5] - Concedendo permissoes:"
 chmod +x /Zanthus/Zeus/pdvJava/PDVTouch.sh
 chmod +x /Zanthus/Zeus/pdvJava/x11vnc.sh
+chmod +x /Zanthus/Zeus/pdvJava/monitor-pos-set-perto.sh
 chmod +x /root/self_perto_config.sh
+
 
 echo "[6] - Limpando arquivos:"
 rm -rf /root/selfcheckout_files.zip
