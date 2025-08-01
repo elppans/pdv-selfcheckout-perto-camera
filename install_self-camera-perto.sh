@@ -105,6 +105,7 @@ echo "[8] - Gerando arquivo de configuracao":
 printf "user=$camera_username\npassword=$camera_password\nipCam=$camera_ip\nport=554\nmonitor_idx=1" > /root/pythonCamIP/config.txt
 
 
-echo "[9] - Finalizado! reiniciando..."
-sleep 5
-reboot
+echo "[9] - Finalizado!"
+# echo "[9] - Finalizado! reiniciando..."
+# sleep 5
+# reboot
