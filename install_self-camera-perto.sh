@@ -88,6 +88,7 @@ curl -JOLk  /Zanthus/Zeus/pdvJava/x11vnc.sh "https://raw.githubusercontent.com/e
 
 echo "[5] - Concedendo permissoes:"
 chmod +x /Zanthus/Zeus/pdvJava/PDVTouch.sh
+chmod +x /Zanthus/Zeus/pdvJava/x11vnc.sh
 chmod +x /root/self_perto_config.sh
 
 echo "[6] - Limpando arquivos:"
