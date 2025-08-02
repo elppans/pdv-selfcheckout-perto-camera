@@ -8,7 +8,9 @@ command -v wmctrl >/dev/null 2>&1 || {
 }
 
 # Variáveis para configuração da janela a posicionar
-aplicacao="IP Camera Stream"
+aplicacao="IP Camera Stream" # Camera Self Perto (Cima)
+# aplicacao="Interface PDV"  # PDV Touch
+# aplicacao="Zanthus Retail" # PDV Java (jpdvgui)
 
 # Variáveis para configuração de monitores
 monitor1='HDMI-2'      # Monitor Primário
