@@ -85,8 +85,8 @@ pip3 install screeninfo    --quiet 2>/tmp/opencv.log # obter informações sobre
 echo "[3] - Extraindo arquivos:"
 # cd /root
 unzip -o "$local"/selfcheckout_files.zip -d /root
-mv -f /root/selfcheckout_files/* /root
-mv -f /root/main.py /root/pythonCamIP/main.py
+cp -a /root/selfcheckout_files/* /root
+cp -a /root/main.py /root/pythonCamIP/main.py
 
 echo "[4] - Movendo PDVTouch.sh:"
 cp /Zanthus/Zeus/pdvJava/PDVTouch.sh /Zanthus/Zeus/pdvJava/PDVTouch.sh.backup_"$(date +%Y%m%d%H%M)"
