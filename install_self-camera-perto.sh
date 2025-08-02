@@ -1,6 +1,14 @@
 #!/bin/bash
 # shellcheck disable=SC2162,SC2316,SC2059,SC2181
 
+#!/bin/bash
+
+# Verifica se o usuário é root (UID 0)
+if [ "$EUID" -ne 0 ]; then
+  echo "Erro: este script deve ser executado como root." >&2
+  exit 1
+fi
+
 local="$(pwd)"
 PIP_ROOT_USER_ACTION=ignore
 
