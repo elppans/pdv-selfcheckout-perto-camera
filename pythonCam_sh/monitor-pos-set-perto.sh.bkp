@@ -1,0 +1,108 @@
+#!/bin/bash
+
+# Script para configurar os monitores e mover automaticamente o aplicativo "$aplicacao"
+
+command -v wmctrl >/dev/null 2>&1 || {
+  echo >&2 "wmctrl não está instalado. Instale com: sudo apt install wmctrl"
+  exit 1
+}
+
+# Variáveis para configuração da janela a posicionar
+aplicacao="IP Camera Stream"
+
+# Variáveis para configuração de monitores
+monitor1='HDMI-2'
+monitor2='HDMI-1'
+resolucao1='1920x1080'
+resolucao2='1024x768'
+
+# Variáveis para posição dos aplicativos para cada tela
+# VARIAVEIS NÃO EDITAVEIS, FUNCIONALIDADE AUTOMATICA
+posicao1='0x0' # Posicao Horizontal x Vertical, 1º monitor
+
+# Extrair a largura do primeiro monitor
+largura_monitor1=$(echo "$resolucao1" | cut -dx -f1)
+
+# Definir posição do segundo monitor em relação ao primeiro
+# ----------------------------------------------
+# Por padrão, o segundo monitor (HDMI-1) será posicionado à direita do primeiro (HDMI-2),
+# alinhado ao topo (Y=0). Isso é o layout clássico, lado a lado:
+
+nova_posicao2="${largura_monitor1}x0" # Construir a nova posição para o segundo monitor
+
+# Substituir a variável posicao2
+# posicao2='1024x0' # Posição após o valor "Horizontal" do 1º monitor. 2º monitor
+posicao2="$nova_posicao2"
+
+# (Opcional) Para centralizar o segundo monitor verticalmente em relação ao primeiro,
+# descomente o trecho abaixo. Isso calcula o deslocamento Y automaticamente com base
+# na diferença de altura entre os dois monitores:
+# altura1=$(echo "$resolucao1" | cut -dx -f2)
+# altura2=$(echo "$resolucao2" | cut -dx -f2)
+# offset_y=$(( (altura1 - altura2) / 2 ))
+# posicao2="${largura_monitor1}x$offset_y"
+
+
+
+# Substitui 'x' por ','
+posicaox1="${posicao1//x/,}"
+posicaox2="${posicao2//x/,}"
+
+# Exportando todas as variáveis
+export monitor1
+export monitor2
+export resolucao1
+export resolucao2
+export posicao1
+export posicao2
+export posicaox1
+export posicaox2
+
+echo "monitor1: $monitor1"
+echo "monitor2: $monitor2"
+echo "resolucao1: $resolucao1"
+echo "resolucao2: $resolucao2"
+echo "posicao1: $posicao1"
+echo "posicao2: $posicao2"
+echo "posicaox1: $posicaox1"
+echo "posicaox2: $posicaox2"
+
+# Configura a resolução e posição dos monitores
+xrandr --output "$monitor1" --mode "$resolucao1" --pos "$posicao1" --primary \
+--output "$monitor2" --mode "$resolucao2" --pos "$posicao2"
+
+# Sair para teste, ver se a resolução funciona:
+# exit
+
+# Função para definir um Loop/Tempo
+sleeping() {
+  local time
+  time="$1"
+  for i in $(seq "$time" -1 1); do
+    echo -ne "$i Seg.\r"
+    sleep 1
+  done
+}
+
+monitor_param() {
+  while true; do
+    WMID=$(wmctrl -l | grep "$aplicacao" | cut -d " " -f1)
+    if [ -z "$WMID" ]; then
+      echo -e "Aguardando \"$aplicacao\" iniciar..."
+      sleeping 5
+      clear
+    else
+      # Garantir que o Java seja configurado na posição parametrizada.
+      # wmctrl -i -r $WMID -e "0,$posicaox1,-1,-1"
+      # posicaox1 = Monitor 1, posicaox2 = Monitor 2
+      echo -e "wmctrl -i -r $WMID -e \"0,$posicaox2,-1,-1\"" # Debug de como ficará o comando
+      wmctrl -i -r $WMID -e "0,$posicaox2,-1,-1"
+      echo -e "Janela \"$aplicacao\" encontrada e configurada."
+      break
+    fi
+  done
+}
+
+monitor_param
+
+
