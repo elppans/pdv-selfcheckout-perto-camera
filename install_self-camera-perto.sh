@@ -74,6 +74,8 @@ else
 fi
 
 # OpenCV com suporte à GUI
+python3 -m venv venv
+source venv/bin/activate
 cd /root || exit 1
 pip3 uninstall -y opencv-python
 pip3 uninstall -y opencv-python-headless
