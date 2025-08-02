@@ -77,11 +77,11 @@ fi
 python3 -m venv venv
 source venv/bin/activate
 cd /root || exit 1
-pip3 uninstall -y opencv-python
-pip3 uninstall -y opencv-python-headless
+pip3 uninstall -y opencv-python --quiet 2>/tmp/opencv.log
+pip3 uninstall -y opencv-python-headless --quiet 2>/tmp/opencv.log
 # pip3 install opencv-python-headless # opcional, se não quiser GUI
-pip3 install opencv-python # versão com GUI (se compilada corretamente)
-pip3 install screeninfo    # obter informações sobre os monitores físicos conectados ao sistema
+pip3 install opencv-python --quiet 2>/tmp/opencv.log # versão com GUI (se compilada corretamente)
+pip3 install screeninfo    --quiet 2>/tmp/opencv.log # obter informações sobre os monitores físicos conectados ao sistema
 
 echo "[3] - Extraindo arquivos:"
 # cd /root
