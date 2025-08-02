@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC2162,SC2316,SC2059,SC2181
 
 local="$(pwd)"
 PIP_ROOT_USER_ACTION=ignore
@@ -63,13 +64,12 @@ else
 fi
 
 # OpenCV com suporte à GUI
-cd /root
+cd /root || exit 1
 pip3 uninstall -y opencv-python
 pip3 uninstall -y opencv-python-headless
-# pip3 install opencv-python screeninfo
 # pip3 install opencv-python-headless # opcional, se não quiser GUI
 pip3 install opencv-python # versão com GUI (se compilada corretamente)
-pip3 install screeninfo # obter informações sobre os monitores físicos conectados ao sistema
+pip3 install screeninfo    # obter informações sobre os monitores físicos conectados ao sistema
 
 echo "[3] - Extraindo arquivos:"
 # cd /root
@@ -78,14 +78,19 @@ mv /root/selfcheckout_files/* /root
 mv /root/main.py /root/pythonCamIP/main.py
 
 echo "[4] - Movendo PDVTouch.sh:"
-cp /Zanthus/Zeus/pdvJava/PDVTouch.sh /Zanthus/Zeus/pdvJava/PDVTouch.sh_old
-rm -rf /Zanthus/Zeus/pdvJava/PDVTouch.sh 
+cp /Zanthus/Zeus/pdvJava/PDVTouch.sh /Zanthus/Zeus/pdvJava/PDVTouch.sh.backup_"$(date +%Y%m%d%H%M)"
+# rm -rf /Zanthus/Zeus/pdvJava/PDVTouch.sh 
 # cp /root/PDVTouch.sh /Zanthus/Zeus/pdvJava/PDVTouch.sh
 rm /root/PDVTouch.sh
 
-curl -JLk -o /Zanthus/Zeus/pdvJava/PDVTouch.sh "https://raw.githubusercontent.com/elppans/pdv-touch/refs/heads/main/PDVTouch_Simples_Perto.sh"
+# Adaptação
 curl -JLk -o /Zanthus/Zeus/pdvJava/x11vnc.sh "https://raw.githubusercontent.com/elppans/pdv-touch/refs/heads/main/x11vnc.sh"
-curl -JLk -o /Zanthus/Zeus/pdvJava/monitor-pos-set-perto.sh "https://raw.githubusercontent.com/elppans/pdv-touch/refs/heads/main/monitor-pos-set-perto.sh
+
+chmod +x "$local"/pythonCam_sh/*
+cp -a "$local"/pythonCam_sh/monitor-pos-set-perto.sh /Zanthus/Zeus/pdvJava/
+cp -a "$local"/pythonCam_sh/self_perto_config.sh /Zanthus/Zeus/pdvJava/
+mv /usr/local/bin/mainapp /usr/local/bin/mainapp.backup_"$(date +%Y%m%d%H%M)"
+cp -a "$local"/pythonCam_sh/mainapp /usr/local/bin/mainapp
 
 echo "[5] - Concedendo permissoes:"
 chmod +x /Zanthus/Zeus/pdvJava/PDVTouch.sh
@@ -110,6 +115,8 @@ printf "user=$camera_username\npassword=$camera_password\nipCam=$camera_ip\nport
 
 
 echo "[9] - Finalizado!"
+echo -e "Antes de reiniciar, configure as variáveis do monitor primário e secundário nos Scripts
+\"/Zanthus/Zeus/pdvJava/monitor-pos-set-perto.sh\" e \"/Zanthus/Zeus/pdvJava/self_perto_config.sh\"\n"
 # echo "[9] - Finalizado! reiniciando..."
 # sleep 5
 # reboot
