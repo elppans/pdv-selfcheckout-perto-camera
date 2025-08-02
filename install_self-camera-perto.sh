@@ -11,9 +11,11 @@ fi
 
 local="$(pwd)"
 PIP_ROOT_USER_ACTION=ignore
+PYTHONWARNINGS=ignore
 
 export local
 export PIP_ROOT_USER_ACTION
+export PYTHONWARNINGS
 
 # Download files
 echo "=================================================================="
