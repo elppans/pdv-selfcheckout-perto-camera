@@ -31,6 +31,8 @@ xrandr --output "$monitor_secundario" --mode "$resolucao_secundaria" --right-of 
 
 # Esta linha fez o Touch não funcionar no Mamãe
 # xinput set-prop "ILITEK ILITEK-TP" "Coordinate Transformation Matrix" 0.652 0 0  0 1 0  0 0 1
+touch /tmp/self_perto_config.log
+xinput list-props "ILITEK ILITEK-TP" >> /tmp/self_perto_config.log
 
 # Adjust resolution and touchscreen - 1024x768
 # xrandr --output 1024x768 --mode 1024x768 --primary
