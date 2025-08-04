@@ -88,16 +88,21 @@ export posicao2
 export posicaox1
 export posicaox2
 
-echo "monitor1: $monitor1"
-echo "monitor2: $monitor2"
-echo "resolucao1: $resolucao1"
-echo "resolucao2: $resolucao2"
-echo "posicao1: $posicao1"
-echo "posicao2: $posicao2"
-echo "posicaox1: $posicaox1"
-echo "posicaox2: $posicaox2"
+touch /tmp/monitor-pos-set-perto.log
+echo "monitor1: $monitor1" | tee /tmp/monitor-pos-set-perto.log
+echo "monitor2: $monitor2" | tee -a /tmp/monitor-pos-set-perto.log
+echo "resolucao1: $resolucao1" | tee -a /tmp/monitor-pos-set-perto.log
+echo "resolucao2: $resolucao2" | tee -a /tmp/monitor-pos-set-perto.log
+echo "posicao1: $posicao1" | tee -a /tmp/monitor-pos-set-perto.log
+echo "posicao2: $posicao2" | tee -a /tmp/monitor-pos-set-perto.log
+echo "posicaox1: $posicaox1" | tee -a /tmp/monitor-pos-set-perto.log
+echo "posicaox2: $posicaox2" | tee -a /tmp/monitor-pos-set-perto.log
 
 # Configura a resolução e posição dos monitores
+echo -e "
+xrandr --output "$monitor1" --mode "$resolucao1" --pos "$posicao1" --primary \
+--output "$monitor2" --mode "$resolucao2" --pos "$posicao2"
+"  >> /tmp/monitor-pos-set-perto.log
 xrandr --output "$monitor1" --mode "$resolucao1" --pos "$posicao1" --primary \
 --output "$monitor2" --mode "$resolucao2" --pos "$posicao2"
 
