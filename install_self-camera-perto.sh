@@ -95,11 +95,12 @@ cp /Zanthus/Zeus/pdvJava/PDVTouch.sh /Zanthus/Zeus/pdvJava/PDVTouch.sh.backup_"$
 rm /root/PDVTouch.sh
 
 # Adaptação
-curl -JLk -o /Zanthus/Zeus/pdvJava/x11vnc.sh "https://raw.githubusercontent.com/elppans/pdv-touch/refs/heads/main/x11vnc.sh"
+# curl -JLk -o /Zanthus/Zeus/pdvJava/x11vnc.sh "https://raw.githubusercontent.com/elppans/pdv-touch/refs/heads/main/x11vnc.sh"
 
 chmod +x "$local"/pythonCam_sh/*
 cp -a "$local"/pythonCam_sh/monitor-pos-set-perto.sh /Zanthus/Zeus/pdvJava/
 cp -a "$local"/pythonCam_sh/self_perto_config.sh /Zanthus/Zeus/pdvJava/
+cp -a "$local"/pythonCam_sh/x11vnc.sh /Zanthus/Zeus/pdvJava/
 mv /usr/local/bin/mainapp /usr/local/bin/mainapp.backup_"$(date +%Y%m%d%H%M)"
 cp -a "$local"/pythonCam_sh/mainapp /usr/local/bin/mainapp
 
@@ -112,6 +113,7 @@ chmod +x /root/self_perto_config.sh
 
 echo "[6] - Limpando arquivos:"
 rm -rf /root/selfcheckout_files.zip
+rm -rf /root/selfcheckout_files
 
 echo "[7] - Config da camera:"
 echo "Informe o usuario: "
