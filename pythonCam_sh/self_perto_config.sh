@@ -28,7 +28,9 @@ export alinhamento_tela
 # Adjust resolution and touchscreen - FHD
 xrandr --output "$monitor_primario" --mode "$resolucao_primaria" --primary
 xrandr --output "$monitor_secundario" --mode "$resolucao_secundaria" --right-of "$monitor_primario" --pos "$alinhamento_tela"
-xinput set-prop "ILITEK ILITEK-TP" "Coordinate Transformation Matrix" 0.652 0 0  0 1 0  0 0 1
+
+# Esta linha fez o Touch não funcionar no Mamãe
+# xinput set-prop "ILITEK ILITEK-TP" "Coordinate Transformation Matrix" 0.652 0 0  0 1 0  0 0 1
 
 # Adjust resolution and touchscreen - 1024x768
 # xrandr --output 1024x768 --mode 1024x768 --primary
