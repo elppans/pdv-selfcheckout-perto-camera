@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # xterm -e "/root/self_perto_config.sh" &
-xterm -e "/Zanthus/Zeus/pdvJava/self_perto_config.sh" &
+xterm -e /Zanthus/Zeus/pdvJava/self_perto_config.sh &
 xterm -e /Zanthus/Zeus/pdvJava/monitor-pos-set-perto.sh
 xterm -e /Zanthus/Zeus/pdvJava/PDVTouch.sh
 popup
