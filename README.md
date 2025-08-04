@@ -3,7 +3,7 @@
 
 >SO: PDV-2.U2204.519.1.9-64
 
-- Instalando
+### Instalando
 
 ```bash
 git clone https://github.com/elppans/pdv-selfcheckout-perto-camera.git
@@ -21,8 +21,9 @@ bash install_self-camera-perto.sh
 >Informe o Usuario da Câmera;  
 >Informe o Senha da Câmera;  
 >Informe o IP da Câmera.  
+___
 
-- Configurando
+### Configurando
 
 Se estiver usando a Interface gráfica, faça o comando `xrandr`, mas se estiver em uma sessão SSH dê um cat no arquivo /tmp/displays.
 Será informado quais entradas estão conectadas, por exemplo:
@@ -67,3 +68,19 @@ resolucao_primaria="1920x1080"
 resolucao_secundaria="1024x768"
 alinhamento_tela="1920x156" # (1080 - 768 / 2)
 ```
+___
+
+### Após reiniciar
+
+```bash
+grep " connected" /tmp/displays
+```
+```bash
+cat /tmp/monitor-pos-set-perto.log
+```
+```bash
+cat /tmp/self_perto_config.log
+```
+
+___
+<img width="851" height="469" alt="image" src="https://github.com/user-attachments/assets/c9f27717-5733-4bda-8132-f61d9a06ad30" />
