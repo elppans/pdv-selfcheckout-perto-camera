@@ -99,12 +99,12 @@ echo "posicaox1: $posicaox1" | tee -a /tmp/monitor-pos-set-perto.log
 echo "posicaox2: $posicaox2" | tee -a /tmp/monitor-pos-set-perto.log
 
 # Configura a resolução e posição dos monitores
-echo -e "
-xrandr --output "$monitor1" --mode "$resolucao1" --pos "$posicao1" --primary \
---output "$monitor2" --mode "$resolucao2" --pos "$posicao2"
-"  >> /tmp/monitor-pos-set-perto.log
-xrandr --output "$monitor1" --mode "$resolucao1" --pos "$posicao1" --primary \
---output "$monitor2" --mode "$resolucao2" --pos "$posicao2"
+
+# monitor_set="xrandr --output \"$monitor1\" --mode \"$resolucao1\" --pos \"$posicao1\" --primary --output \"$monitor2\" --mode \"$resolucao2\" --pos \"$posicao2\""
+monitor_set="xrandr --output \"$monitor1\" --mode \"$resolucao1\" --pos \"$posicao1\" --primary --output \"$monitor2\" --mode \"$resolucao2\" --right-of \"$monitor1\" --pos \"$posicao2\""
+
+echo -e "$monitor_set" >> /tmp/monitor-pos-set-perto.log
+eval "$monitor_set"
 
 # Sair para teste, ver se a resolução funciona:
 # exit
